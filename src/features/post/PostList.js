@@ -22,7 +22,7 @@ import {
   fetchAsyncDeletePost,
   selectPosts,
   selectPost, fetchAsyncUpdatePost
-} from './postSlice';
+} from '../post/PostSlice';
 
 // Style
 const styles = {
@@ -53,8 +53,14 @@ const PostList = () => {
 
   // 初回レンダリング時にpostの一覧を取得
   useEffect(() => {
-    dispatch(fetchAsynchGetPosts());
+    const fetchData = async () => {
+      await dispatch(fetchAsynchGetPosts());
+      // データが正常に取得できた場合の処理
+    };
+    fetchData();
   }, []);
+
+  console.log(dispatch(fetchAsyncGetPost()))
 
   // Editモーダル起動時に選択されたpostの値をセット
   useEffect(() => {
